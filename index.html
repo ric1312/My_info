@@ -54,11 +54,6 @@
             text-shadow: 0 0 12px rgba(255, 85, 0, 0.4);
         }
 
-        .header .stats {
-            color: #557755;
-            font-size: 14px;
-        }
-
         .badge {
             display: inline-block;
             background: #0f1f0f;
@@ -161,14 +156,6 @@
             text-align: center;
         }
 
-        .footer .warn {
-            color: #884422;
-            border: 1px solid #442211;
-            padding: 10px;
-            border-radius: 6px;
-            background: #110a06;
-        }
-
         @media (max-width: 700px) {
             .header {
                 flex-direction: column;
@@ -195,9 +182,6 @@
     <!-- HEADER -->
     <div class="header">
         <h1>📁 <span>My</span> info</h1>
-        <div class="stats">
-            <span class="badge" id="recordCount">0</span> записей
-        </div>
     </div>
 
     <!-- TABLE -->
@@ -206,12 +190,12 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Никнейм</th>
-                    <th>Платформа</th>
-                    <th>Ссылка 1</th>
-                    <th>Ссылка 2</th>
-                    <th>Статус</th>
-                    <th>Комментарий</th>
+                    <th>Name</th>
+                    <th>Platform</th>
+                    <th>Reference 1</th>
+                    <th>Reference 2</th>
+                    <th>Comments</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -220,14 +204,8 @@
         </table>
     </div>
 
-    <!-- FOOTER -->
-    <div class="footer">
-        <div class="warn">
-            ⚠ ВСЕ ДАННЫЕ СОБРАНЫ ИЗ ОТКРЫТЫХ ПУБЛИЧНЫХ ИСТОЧНИКОВ.<br>
-            САЙТ НЕ ХРАНИТ ПЕРСОНАЛЬНЫЕ ДАННЫЕ.<br>
-            ОТВЕТСТВЕННОСТЬ ЗА ИСПОЛЬЗОВАНИЕ ЛЕЖИТ НА ПОЛЬЗОВАТЕЛЕ.
-        </div>
-    </div>
+    <!-- FOOTER (пустой) -->
+    <div class="footer"></div>
 
 </div>
 
@@ -240,10 +218,8 @@
             const text = await response.text();
             const rows = text.trim().split('\n').map(row => row.split(','));
             if (rows.length < 2) throw new Error('Нет данных');
-            const headers = rows[0];
             const data = rows.slice(1).filter(row => row.length > 1 && row[2]?.toLowerCase().trim() === 'tg');
-            renderTable(headers, data);
-            document.getElementById('recordCount').textContent = data.length;
+            renderTable(data);
         } catch (e) {
             document.getElementById('tableBody').innerHTML =
                 `<tr><td colspan="7" style="color:#884422; text-align:center; padding:30px;">⚠ ОШИБКА: data.csv не загружен или пуст</td></tr>`;
@@ -251,7 +227,7 @@
         }
     }
 
-    function renderTable(headers, data) {
+    function renderTable(data) {
         const tbody = document.getElementById('tableBody');
         tbody.innerHTML = '';
         data.forEach(row => {
@@ -261,15 +237,15 @@
             const platform = row[2] || '';
             const link1 = row[3] || '';
             const link2 = row[4] || '';
-            const status = (row[5] || '').toLowerCase().trim();
-            const comment = row[6] || '';
+            const comments = row[5] || '';
+            const status = row[6] || '';
 
             const statusClass = {
                 'активен': 'status-active',
                 'скрыт': 'status-hidden',
                 'архив': 'status-archive',
                 'удалён': 'status-deleted'
-            } [status] || '';
+            } [status.toLowerCase().trim()] || '';
 
             tr.innerHTML = `
                 <td>${id}</td>
@@ -277,8 +253,8 @@
                 <td><span class="badge">${escapeHTML(platform)}</span></td>
                 <td>${formatLink(link1)}</td>
                 <td>${formatLink(link2)}</td>
+                <td style="color:#889988; font-size:13px;">${escapeHTML(comments)}</td>
                 <td><span class="status ${statusClass}">${escapeHTML(status || '—')}</span></td>
-                <td style="color:#889988; font-size:13px;">${escapeHTML(comment)}</td>
             `;
             tbody.appendChild(tr);
         });
