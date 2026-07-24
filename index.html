@@ -1,24 +1,304 @@
-<table style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; font-size: 12px">
-  <thead>
-    <tr>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">ID</th>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">Name</th>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">Platform</th>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">Reference1</th>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">Reference2</th>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">Status</th>
-      <th style="background-color: #000000; color: #2126c0; text-align: center; padding: 8px; font-weight: bold; border: 1px solid #0054c2">Comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">001</td>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">KriCk_x1o</td>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">TG</td>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">&lt;<a href="https://t.me/KriCk_x1o">t.me/KriCk_x1o</a></td>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">&lt;<a href="https://t.me/sWating_I">t.me/sWating_I</a></td>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">Hidden</td>
-      <td style="color: #006aff; text-align: left; padding: 8px; border: 1px solid #0054c2">The Internet is not anonymous</td>
-    </tr>
-  </tbody>
-</table>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My info</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0b0b;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            padding: 30px 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            border: 1px solid #1a2a1a;
+            padding: 25px;
+            background: #0f0f0f;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.05);
+            border-radius: 12px;
+        }
+
+        .header {
+            border-bottom: 2px solid #00ff41;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            letter-spacing: 2px;
+            color: #00ff41;
+            text-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+        }
+
+        .header h1 span {
+            color: #ff5500;
+            text-shadow: 0 0 12px rgba(255, 85, 0, 0.4);
+        }
+
+        .header .stats {
+            color: #557755;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #0f1f0f;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #557755;
+            border: 1px solid #1a2a1a;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #141f14;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: #0c0c0c;
+        }
+
+        th {
+            background: #0f1f0f;
+            color: #00ff41;
+            text-align: left;
+            padding: 14px 12px;
+            border-bottom: 2px solid #00ff41;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #121f12;
+            vertical-align: middle;
+            word-break: break-word;
+        }
+
+        tr:hover td {
+            background: #121f12;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: #003300;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+        }
+
+        .status-hidden {
+            background: #331100;
+            color: #ff8800;
+            border: 1px solid #ff8800;
+        }
+
+        .status-archive {
+            background: #111122;
+            color: #7788aa;
+            border: 1px solid #334466;
+        }
+
+        .status-deleted {
+            background: #220000;
+            color: #ff4444;
+            border: 1px solid #ff4444;
+        }
+
+        a {
+            color: #00aaff;
+            text-decoration: none;
+            border-bottom: 1px dashed #1a3a4a;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #88ddff;
+            border-bottom: 1px solid #88ddff;
+            text-shadow: 0 0 8px rgba(0, 170, 255, 0.3);
+        }
+
+        .footer {
+            margin-top: 35px;
+            border-top: 1px solid #121f12;
+            padding-top: 20px;
+            color: #334433;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .footer .warn {
+            color: #884422;
+            border: 1px solid #442211;
+            padding: 10px;
+            border-radius: 6px;
+            background: #110a06;
+        }
+
+        @media (max-width: 700px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .header h1 {
+                font-size: 20px;
+            }
+            td, th {
+                font-size: 12px;
+                padding: 8px 6px;
+            }
+            .container {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="app">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>📁 <span>My</span> info</h1>
+        <div class="stats">
+            <span class="badge" id="recordCount">0</span> записей
+        </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Никнейм</th>
+                    <th>Платформа</th>
+                    <th>Ссылка 1</th>
+                    <th>Ссылка 2</th>
+                    <th>Статус</th>
+                    <th>Комментарий</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Строки из CSV -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="warn">
+            ⚠ ВСЕ ДАННЫЕ СОБРАНЫ ИЗ ОТКРЫТЫХ ПУБЛИЧНЫХ ИСТОЧНИКОВ.<br>
+            САЙТ НЕ ХРАНИТ ПЕРСОНАЛЬНЫЕ ДАННЫЕ.<br>
+            ОТВЕТСТВЕННОСТЬ ЗА ИСПОЛЬЗОВАНИЕ ЛЕЖИТ НА ПОЛЬЗОВАТЕЛЕ.
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ЗАГРУЗКА CSV
+    async function loadData() {
+        try {
+            const response = await fetch('data.csv');
+            if (!response.ok) throw new Error('data.csv не найден');
+            const text = await response.text();
+            const rows = text.trim().split('\n').map(row => row.split(','));
+            if (rows.length < 2) throw new Error('Нет данных');
+            const headers = rows[0];
+            const data = rows.slice(1).filter(row => row.length > 1 && row[2]?.toLowerCase().trim() === 'tg');
+            renderTable(headers, data);
+            document.getElementById('recordCount').textContent = data.length;
+        } catch (e) {
+            document.getElementById('tableBody').innerHTML =
+                `<tr><td colspan="7" style="color:#884422; text-align:center; padding:30px;">⚠ ОШИБКА: data.csv не загружен или пуст</td></tr>`;
+            console.error(e);
+        }
+    }
+
+    function renderTable(headers, data) {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        data.forEach(row => {
+            const tr = document.createElement('tr');
+            const id = row[0] || '';
+            const name = row[1] || '';
+            const platform = row[2] || '';
+            const link1 = row[3] || '';
+            const link2 = row[4] || '';
+            const status = (row[5] || '').toLowerCase().trim();
+            const comment = row[6] || '';
+
+            const statusClass = {
+                'активен': 'status-active',
+                'скрыт': 'status-hidden',
+                'архив': 'status-archive',
+                'удалён': 'status-deleted'
+            } [status] || '';
+
+            tr.innerHTML = `
+                <td>${id}</td>
+                <td><strong>${escapeHTML(name)}</strong></td>
+                <td><span class="badge">${escapeHTML(platform)}</span></td>
+                <td>${formatLink(link1)}</td>
+                <td>${formatLink(link2)}</td>
+                <td><span class="status ${statusClass}">${escapeHTML(status || '—')}</span></td>
+                <td style="color:#889988; font-size:13px;">${escapeHTML(comment)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function formatLink(url) {
+        if (!url || url.trim() === '') return '—';
+        const clean = url.trim();
+        if (clean.startsWith('<a')) return clean;
+        const display = clean.replace(/^https?:\/\//, '');
+        return `<a href="${clean}" target="_blank">${escapeHTML(display)}</a>`;
+    }
+
+    function escapeHTML(str) {
+        if (!str) return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    loadData();
+</script>
+
+</body>
+</html>
